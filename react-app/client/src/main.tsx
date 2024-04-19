@@ -5,6 +5,7 @@ import "./index.css";
 import { setup } from "./dojo/generated/setup.ts";
 import { DojoProvider } from "./dojo/DojoContext.tsx";
 import { dojoConfig } from "../dojoConfig.ts";
+import NewApp from "./NewApp.tsx";
 
 async function init() {
     const rootElement = document.getElementById("root");
@@ -17,6 +18,7 @@ async function init() {
         <React.StrictMode>
             <DojoProvider value={setupResult}>
                 <App />
+                <NewApp />
             </DojoProvider>
         </React.StrictMode>
     );
