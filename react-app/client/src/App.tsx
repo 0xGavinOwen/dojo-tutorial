@@ -12,27 +12,27 @@ function App() {
   const {
     setup: {
       systemCalls: { spawn, move }, // already return a function (WRITE)
-      clientComponents: { Position, Moves }, // already return component (READ)
+      clientComponents: { Position, Moves }, // return a client Component
     },
     account,
   } = useDojo();
 
-  //use state to handle clipboard
-  const [clipboardStatus, setClipboardStatus] = useState({
-    message: "",
-    isError: false,
-  });
-
-  // entity id we are syncing
+  // Get account address and store it as an entityId
   const entityId = getEntityIdFromKeys([
     BigInt(account?.account.address),
   ]) as Entity;
 
-  // get current component values
+  // get current component values (READ)
   const position = useComponentValue(Position, entityId);
   const moves = useComponentValue(Moves, entityId);
 
   console.log(moves);
+
+   //use state to handle clipboard
+   const [clipboardStatus, setClipboardStatus] = useState({
+    message: "",
+    isError: false,
+  });
 
   // function to handle restore burners
   const handleRestoreBurners = async () => {
