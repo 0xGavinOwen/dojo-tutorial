@@ -7,14 +7,17 @@ import { getEntityIdFromKeys } from "@dojoengine/utils";
 import { useDojo } from "./dojo/useDojo";
 
 function App() {
+
+  // hooks to call the spawn move and geth burner account
   const {
     setup: {
-      systemCalls: { spawn, move },
-      clientComponents: { Position, Moves },
+      systemCalls: { spawn, move }, // already return a function (WRITE)
+      clientComponents: { Position, Moves }, // already return component (READ)
     },
     account,
   } = useDojo();
 
+  //use state to handle clipboard
   const [clipboardStatus, setClipboardStatus] = useState({
     message: "",
     isError: false,
@@ -31,6 +34,7 @@ function App() {
 
   console.log(moves);
 
+  // function to handle restore burners
   const handleRestoreBurners = async () => {
     try {
       await account?.applyFromClipboard();
@@ -46,6 +50,7 @@ function App() {
     }
   };
 
+  // clear use state message
   useEffect(() => {
     if (clipboardStatus.message) {
       const timer = setTimeout(() => {
